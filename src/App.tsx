@@ -1,5 +1,11 @@
+import AppLayout from "./layout/AppLayout";
+
 function App() {
-  return <div>App</div>;
+  return (
+    <div>
+      <AppLayout />
+    </div>
+  );
 }
 
 export default App;
