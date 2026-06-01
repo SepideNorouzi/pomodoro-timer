@@ -5,7 +5,6 @@ import TimerControls from "./components/TimerPanel/TimerControls";
 import ProgressBar from "./components/TimerPanel/ProgressBar";
 import TaskInput from "./components/TaskInput/TaskInput";
 import Sidebar from "./components/Sidebar/Sidebar";
-import { useTimer } from "./hooks/UseTimer";
 
 import SettingsModal from "./components/Setting/SettingsModal";
 import "./App.css";
@@ -13,7 +12,6 @@ import "./App.css";
 //   timer panel  → flex: 0 0 70%  (fixed 70%)
 //   sidebar      → flex: 1        (takes the remaining 30%)
 const App: React.FC = () => {
-  const timer = useTimer();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -35,22 +33,15 @@ const App: React.FC = () => {
       <main className={`timer-panel ${isExpanded ? "expanded" : ""}`}>
         {/* Timer container */}
         <section className="timer-container">
-          <ModeSelector activeMode={timer.mode} onModeChange={timer.setMode} />
+          <ModeSelector />
 
-          <TimerDisplay secondsLeft={timer.secondsLeft} />
+          <TimerDisplay />
 
-          <TimerControls
-            status={timer.status}
-            onStart={timer.start}
-            onPause={timer.pause}
-            onReset={timer.reset}
-            onSettings={handleSettings}
-            onExpand={handleExpand}
-          />
+          <TimerControls onSettings={handleSettings} onExpand={handleExpand} />
         </section>
 
         {/* fills as the session elapses */}
-        <ProgressBar progress={timer.progress} />
+        <ProgressBar />
 
         {/* Task input*/}
         {!isExpanded && <TaskInput />}

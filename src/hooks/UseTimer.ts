@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { MODE_DURATIONS, type TimerMode, type TimerStatus } from "../types";
+import { type TimerMode, type TimerStatus } from "../types";
 
 // Everything the UI needs to display and control the timer.
 export interface UseTimerReturn {
   mode: TimerMode;
   status: TimerStatus;
   secondsLeft: number;
-  progress: number; // 0 → 1, drives the progress bar
+  progress: number;
+  durations: Record<TimerMode, number>;
+  updateDuration: (mode: TimerMode, minutes: number) => void;
   setMode: (m: TimerMode) => void;
   start: () => void;
   pause: () => void;
@@ -14,11 +16,14 @@ export interface UseTimerReturn {
 }
 
 export function useTimer(): UseTimerReturn {
-  const [mode, setModeState] = useState<TimerMode>("pomodoro");
+  const [currentMode, setModeState] = useState<TimerMode>("pomodoro");
   const [status, setStatus] = useState<TimerStatus>("idle");
-  const [secondsLeft, setSecondsLeft] = useState<number>(
-    MODE_DURATIONS["pomodoro"],
-  );
+  const [durations, setDurations] = useState({
+    pomodoro: 25 * 60,
+    short_break: 5 * 60,
+    long_break: 15 * 60,
+  });
+  const [secondsLeft, setSecondsLeft] = useState<number>(durations.pomodoro);
 
   // useRef keeps the interval ID stable across renders without triggering
   // a re-render itself. If i stored it in useState, we'd cause an extra cycle.
@@ -38,9 +43,9 @@ export function useTimer(): UseTimerReturn {
       clearTimer();
       setStatus("idle");
       setModeState(newMode);
-      setSecondsLeft(MODE_DURATIONS[newMode]);
+      setSecondsLeft(durations[newMode]);
     },
-    [clearTimer],
+    [clearTimer, durations],
   );
 
   // Start / Resume
@@ -71,11 +76,11 @@ export function useTimer(): UseTimerReturn {
   const reset = useCallback(() => {
     clearTimer();
     setStatus("idle");
-    setSecondsLeft(MODE_DURATIONS[mode]);
-  }, [clearTimer, mode]);
+    setSecondsLeft(durations[currentMode]);
+  }, [clearTimer, durations, currentMode]);
 
   // Cleanup
-  // If the component using this hook unmounts while the timer is running, 
+  // If the component using this hook unmounts while the timer is running,
   // i MUST clear the interval or it keeps firing forever
   // (and tries to setState on an unmounted component → memory leak).
   useEffect(() => {
@@ -84,8 +89,36 @@ export function useTimer(): UseTimerReturn {
 
   // progress (0 → 1)
   // progress = elapsed / total = (total - left) / total
-  const total = MODE_DURATIONS[mode];
-  const progress = (total - secondsLeft) / total;
+  const total = durations[currentMode] || 1;
+  const progress = 1 - secondsLeft / total;
 
-  return { mode, status, secondsLeft, progress, setMode, start, pause, reset };
+  const updateDuration = (mode: TimerMode, minutes: number) => {
+    const seconds = minutes * 60;
+    setDurations((prev) => {
+      const updated = {
+        ...prev,
+        [mode]: seconds,
+      };
+      // if current mode is affected → reset timer immediately
+      if (mode === currentMode) {
+        clearTimer();
+        setStatus("idle");
+        setSecondsLeft(seconds);
+      }
+      return updated;
+    });
+  };
+
+  return {
+    mode: currentMode,
+    status,
+    secondsLeft,
+    progress,
+    durations,
+    updateDuration,
+    setMode,
+    start,
+    pause,
+    reset,
+  };
 }

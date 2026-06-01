@@ -1,5 +1,5 @@
-import { useState } from "react";
 import DurationSetting from "./DurationSetting";
+import { useTimerContext } from "../../context/TimerContext";
 import "./SettingsModal.css";
 
 interface SettingsModalProps {
@@ -8,9 +8,7 @@ interface SettingsModalProps {
 }
 
 const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
-  const [pomodoroMinutes, setPomodoroMinutes] = useState(25);
-  const [shortBreakMinutes, setShortBreakMinutes] = useState(5);
-  const [longBreakMinutes, setLongBreakMinutes] = useState(15);
+  const { durations, updateDuration } = useTimerContext();
 
   if (!isOpen) return null;
 
@@ -21,34 +19,44 @@ const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
           ✕
         </button>
 
-        <div className="settings-grid">
-          <DurationSetting
-            title="Pomodoro Duration"
-            value={pomodoroMinutes}
-            onIncrement={() => setPomodoroMinutes((prev) => prev + 1)}
-            onDecrement={() =>
-              setPomodoroMinutes((prev) => Math.max(1, prev - 1))
-            }
-          />
+        <DurationSetting
+          title="Pomodoro Duration"
+          value={durations.pomodoro / 60}
+          onIncrement={() =>
+            updateDuration("pomodoro", durations.pomodoro / 60 + 1)
+          }
+          onDecrement={() =>
+            updateDuration("pomodoro", Math.max(1, durations.pomodoro / 60 - 1))
+          }
+        />
 
-          <DurationSetting
-            title="Short Break Duration"
-            value={shortBreakMinutes}
-            onIncrement={() => setShortBreakMinutes((prev) => prev + 1)}
-            onDecrement={() =>
-              setShortBreakMinutes((prev) => Math.max(1, prev - 1))
-            }
-          />
+        <DurationSetting
+          title="Short Break Duration"
+          value={durations.short_break / 60}
+          onIncrement={() =>
+            updateDuration("short_break", durations.short_break / 60 + 1)
+          }
+          onDecrement={() =>
+            updateDuration(
+              "short_break",
+              Math.max(1, durations.short_break / 60 - 1),
+            )
+          }
+        />
 
-          <DurationSetting
-            title="Long Break Duration"
-            value={longBreakMinutes}
-            onIncrement={() => setLongBreakMinutes((prev) => prev + 1)}
-            onDecrement={() =>
-              setLongBreakMinutes((prev) => Math.max(1, prev - 1))
-            }
-          />
-        </div>
+        <DurationSetting
+          title="Long Break Duration"
+          value={durations.long_break / 60}
+          onIncrement={() =>
+            updateDuration("long_break", durations.long_break / 60 + 1)
+          }
+          onDecrement={() =>
+            updateDuration(
+              "long_break",
+              Math.max(1, durations.long_break / 60 - 1),
+            )
+          }
+        />
         
       </div>
     </div>

@@ -1,10 +1,7 @@
 import React from "react";
 import { type TimerMode } from "../../types";
+import { useTimerContext } from "../../context/TimerContext";
 
-interface ModeSelectorProps {
-  activeMode: TimerMode;
-  onModeChange: (mode: TimerMode) => void;
-}
 
 const MODES: { value: TimerMode; label: string }[] = [
   { value: "pomodoro", label: "pomodoro" },
@@ -12,19 +9,17 @@ const MODES: { value: TimerMode; label: string }[] = [
   { value: "long_break", label: "long break" },
 ];
 
-const ModeSelector: React.FC<ModeSelectorProps> = ({
-  activeMode,
-  onModeChange,
-}) => {
+const ModeSelector: React.FC = () => {
+  const { mode, setMode } = useTimerContext();
   return (
     <div className="mode-selector">
       {MODES.map(({ value, label }) => (
         <button
           key={value}
-          className={`mode-btn ${activeMode === value ? "mode-btn--active" : ""}`}
-          onClick={() => onModeChange(value)}
+          className={`mode-btn ${mode === value ? "mode-btn--active" : ""}`}
+          onClick={() => setMode(value)}
           type="button"
-          aria-pressed={activeMode === value}
+          aria-pressed={mode === value}
         >
           {label}
         </button>

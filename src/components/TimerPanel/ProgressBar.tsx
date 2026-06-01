@@ -1,9 +1,5 @@
 import React from "react";
-
-interface ProgressBarProps {
-  // 0 = session just started, 1 = full 25 minutes done.
-  progress: number;
-}
+import { useTimerContext } from "../../context/TimerContext";
 
 // The filler width is `progress * 100` percent, updated on every timer tick.
 //
@@ -11,7 +7,8 @@ interface ProgressBarProps {
 // Because the width is a DYNAMIC value that changes every second.
 // CSS classes are for static/toggled states. Dynamic interpolated values
 // belong in inline styles.
-const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
+const ProgressBar: React.FC = () => {
+  const { progress } = useTimerContext();
   const clamped = Math.min(1, Math.max(0, progress));
   const widthPercent = `${(clamped * 100).toFixed(2)}%`;
 
@@ -24,10 +21,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
       aria-valuemax={100}
       aria-label="Session progress"
     >
-      <div
-        className="progress-bar__fill"
-        style={{ width: widthPercent }}
-      />
+      <div className="progress-bar__fill" style={{ width: widthPercent }} />
     </div>
   );
 };

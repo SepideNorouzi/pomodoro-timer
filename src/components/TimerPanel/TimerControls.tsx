@@ -1,12 +1,7 @@
 import React from "react";
-import { type TimerStatus } from "../../types";
+import { useTimerContext } from "../../context/TimerContext";
 
 interface TimerControlsProps {
-  status: TimerStatus;
-  onStart: () => void;
-  onPause: () => void;
-  onReset: () => void;
-  // onSettings and onExpand are placeholders.
   onSettings: () => void;
   onExpand: () => void;
 }
@@ -14,13 +9,10 @@ interface TimerControlsProps {
 //   Row 1: the main action button ("start" / "pause")
 //   Row 2: three icon buttons
 const TimerControls: React.FC<TimerControlsProps> = ({
-  status,
-  onStart,
-  onPause,
-  onReset,
   onSettings,
   onExpand,
 }) => {
+  const { status, start, pause, reset } = useTimerContext();
   // The primary button toggles between start and pause based on timer status.
   // "idle" and "paused" both show "start", they both mean "the timer is not running".
   const isRunning = status === "running";
@@ -29,7 +21,7 @@ const TimerControls: React.FC<TimerControlsProps> = ({
     <div className="timer-controls">
       <button
         className="timer-controls__primary"
-        onClick={isRunning ? onPause : onStart}
+        onClick={isRunning ? pause : start}
         type="button"
       >
         {isRunning ? "pause" : "start"}
@@ -38,7 +30,7 @@ const TimerControls: React.FC<TimerControlsProps> = ({
       <div className="timer-controls__secondary">
         <button
           className="timer-controls__icon-btn"
-          onClick={onReset}
+          onClick={reset}
           type="button"
           title="Reset timer"
           aria-label="Reset timer"
