@@ -1,0 +1,247 @@
+/* ============================================================
+   App.css — STRUCTURAL ONLY
+   These are skeleton/layout styles based on the wireframe.
+   You will replace / extend these with your own design system.
+   
+   Philosophy: every class here answers "WHERE does this go?"
+   not "HOW does this look?" — that's your job next.
+   ============================================================ */
+
+/* ── Reset basics ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif; /* placeholder — you'll swap this */
+  background: #f5f5f5; /* matches your wireframe bg color */
+  min-height: 100vh;
+}
+
+/* ── Root layout: two columns ─────────────────────────────── */
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── Left panel: 70% ──────────────────────────────────────── */
+.timer-panel {
+  flex: 0 0 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+/* ── Right panel: 30% (defined in Sidebar.tsx's .sidebar) ─── */
+.sidebar {
+  flex: 1; /* fills the remaining 30% */
+  border-left: 1px solid #ccc;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TIMER CONTAINER
+   The big box: mode tabs + clock + buttons
+   ───────────────────────────────────────────────────────────── */
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: #e0e0e0; /* wireframe gray placeholder */
+  border-radius: 4px;
+}
+
+/* ── Mode selector: 3 tabs in a row ──────────────────────── */
+.mode-selector {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mode-btn {
+  padding: 0.5rem 1.25rem;
+  background: #ccc;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.mode-btn--active {
+  background: #555;
+  color: #fff;
+}
+
+/* ── Big clock display ────────────────────────────────────── */
+.timer-display {
+  width: 100%;
+  background: #d5d5d5;
+  border-radius: 4px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.timer-display__time {
+  font-size: 5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+/* ── Controls: start/pause + icon row ────────────────────── */
+.timer-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.timer-controls__primary {
+  padding: 0.6rem 3rem;
+  background: #888;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+}
+
+.timer-controls__secondary {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.timer-controls__icon-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #aaa;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   PROGRESS BAR
+   ───────────────────────────────────────────────────────────── */
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #d0d0d0;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  background: #555;
+  border-radius: 99px;
+  transition: width 1s linear; /* smooth 1-second step, synced to the timer tick */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TASK INPUT
+   ───────────────────────────────────────────────────────────── */
+.task-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+
+.task-input__field {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background: #f0f0f0;
+}
+
+.task-input__btn {
+  padding: 0.6rem;
+  background: #aaa;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.task-input__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TASK LIST (in sidebar)
+   ───────────────────────────────────────────────────────────── */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.task-list--empty {
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-top: 3rem;
+}
+
+.task-list__empty-msg {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* ── Header row: "task | duration" ───────────────────────── */
+.task-list__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0.75rem;
+  background: #ccc;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+/* ── Individual task row ──────────────────────────────────── */
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: #e8e8e8;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.task-item__name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 1rem;
+}
+
+.task-item__duration {
+  font-variant-numeric: tabular-nums; /* digits stay same width → no layout jump */
+  color: #555;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
