@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModeSelector from "./components/TimerPanel/ModeSelector";
 import TimerDisplay from "./components/TimerPanel/TimerDisplay";
 import TimerControls from "./components/TimerPanel/TimerControls";
@@ -8,12 +8,27 @@ import Sidebar from "./components/Sidebar/Sidebar";
 
 import SettingsModal from "./components/Setting/SettingsModal";
 import "./App.css";
+import { useTaskContext } from "./context/TaskContext";
+import { useTimerContext } from "./context/TimerContext";
 
 //   timer panel  → flex: 0 0 70%  (fixed 70%)
 //   sidebar      → flex: 1        (takes the remaining 30%)
 const App: React.FC = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const { activeTaskId, logTime } = useTaskContext();
+  const { setOnTick } = useTimerContext();
+
+  useEffect(() => {
+    setOnTick(() => {
+      if (activeTaskId) {
+        logTime(activeTaskId, 1);
+      }
+    });
+  }, [setOnTick, logTime]);
+
+  // Whenever the active task changes, we want to update the timer's onTick callback
 
   // Placeholder handlers for settings and expand (later)
   const handleSettings = () => {

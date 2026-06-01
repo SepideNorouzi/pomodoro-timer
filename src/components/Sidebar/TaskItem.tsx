@@ -12,9 +12,13 @@ interface TaskItemProps {
 // is consistent across the whole app
 const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
   // Only the actual task object remains a prop, because TaskItem is rendering one specific task
-  const { deleteTask } = useTaskContext();
+  const { deleteTask, activeTaskId, setActiveTaskId } = useTaskContext();
+
   return (
-    <div className="task-item">
+    <div
+      className={`task-item ${activeTaskId === task.id ? "active" : ""}`}
+      onClick={() => setActiveTaskId(task.id)}
+    >
       <span className="task-item__name">{task.name}</span>
 
       <span className="task-item__duration">

@@ -10,6 +10,7 @@ export interface UseTimerReturn {
   durations: Record<TimerMode, number>;
   updateDuration: (mode: TimerMode, minutes: number) => void;
   setMode: (m: TimerMode) => void;
+  setOnTick: (fn: () => void) => void;
   start: () => void;
   pause: () => void;
   reset: () => void;
@@ -61,6 +62,7 @@ export function useTimer(): UseTimerReturn {
           setStatus("idle");
           return 0;
         }
+        onTickRef.current?.(); // this is the bridge
         return prev - 1;
       });
     }, 1000);
@@ -109,6 +111,12 @@ export function useTimer(): UseTimerReturn {
     });
   };
 
+  const onTickRef = useRef<(() => void) | null>(null);
+
+  const setOnTick = (fn: () => void) => {
+    onTickRef.current = fn;
+  };
+
   return {
     mode: currentMode,
     status,
@@ -120,5 +128,6 @@ export function useTimer(): UseTimerReturn {
     start,
     pause,
     reset,
+    setOnTick,
   };
 }

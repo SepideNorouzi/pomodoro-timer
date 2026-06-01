@@ -6,9 +6,13 @@ export interface UseTasksReturn {
   addTask: (name: string) => void;
   logTime: (id: string, seconds: number) => void; // called by timer each tick
   deleteTask: (id: string) => void;
+  activeTaskId: string | null;
+  setActiveTaskId: (id: string | null) => void;
 }
 
 export function useTasks(): UseTasksReturn {
+  const [activeTaskId, setActiveTaskId] = useState<string | null>(null);
+
   const [tasks, setTasks] = useState<Task[]>(() => {
     const savedTasks = localStorage.getItem("tasks");
     if (!savedTasks) {
@@ -29,7 +33,6 @@ export function useTasks(): UseTasksReturn {
       name: trimmed,
       totalSeconds: 0,
     };
-
     //always appends to the freshest state
     setTasks((prev) => [...prev, newTask]);
   }, []);
@@ -55,5 +58,5 @@ export function useTasks(): UseTasksReturn {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  return { tasks, addTask, logTime, deleteTask };
+  return { tasks, addTask, logTime, deleteTask, activeTaskId, setActiveTaskId };
 }
