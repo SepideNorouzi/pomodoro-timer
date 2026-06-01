@@ -1,16 +1,12 @@
 import React from "react";
-import { type Task } from "../../types";
 import TaskList from "./TaskList";
+import { useTaskContext } from "../../context/TaskContext";
 
-interface SidebarProps {
-  tasks: Task[];
-  onDeleteTask: (id: string) => void;
-}
-
-const Sidebar: React.FC<SidebarProps> = ({ tasks, onDeleteTask }) => {
+const Sidebar: React.FC = () => {
+  const { tasks } = useTaskContext();
   return (
     <aside className="sidebar">
-      <TaskList tasks={tasks} onDeleteTask={onDeleteTask} />
+      <TaskList tasks={tasks} />
     </aside>
   );
 };

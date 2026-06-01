@@ -6,7 +6,7 @@ import ProgressBar from "./components/TimerPanel/ProgressBar";
 import TaskInput from "./components/TaskInput/TaskInput";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { useTimer } from "./hooks/UseTimer";
-import { useTasks } from "./hooks/UseTasks";
+
 import SettingsModal from "./components/Setting/SettingsModal";
 import "./App.css";
 
@@ -14,7 +14,6 @@ import "./App.css";
 //   sidebar      → flex: 1        (takes the remaining 30%)
 const App: React.FC = () => {
   const timer = useTimer();
-  const taskManager = useTasks();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -54,16 +53,11 @@ const App: React.FC = () => {
         <ProgressBar progress={timer.progress} />
 
         {/* Task input*/}
-        {!isExpanded && <TaskInput onAddTask={taskManager.addTask} />}
+        {!isExpanded && <TaskInput />}
       </main>
 
       {/* Sidebar (30%)*/}
-      {!isExpanded && (
-        <Sidebar
-          tasks={taskManager.tasks}
-          onDeleteTask={taskManager.deleteTask}
-        />
-      )}
+      {!isExpanded && <Sidebar />}
 
       <SettingsModal isOpen={isSettingsOpen} onClose={closeSettings} />
     </div>

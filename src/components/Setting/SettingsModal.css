@@ -53,3 +53,28 @@
   font-size: 1.2rem;
   cursor: pointer;
 }
+
+.duration-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 1rem;
+
+  margin-top: 2rem;
+}
+
+.duration-btn {
+  width: 40px;
+  height: 40px;
+
+  cursor: pointer;
+}
+
+.duration-value {
+  font-size: 2rem;
+  font-weight: bold;
+
+  min-width: 80px;
+  text-align: center;
+}

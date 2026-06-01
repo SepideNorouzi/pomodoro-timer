@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-
-interface TaskInputProps {
-  onAddTask: (name: string) => void;
-}
+import { useTaskContext } from "../../context/TaskContext";
 
 // Once "add task" is clicked, it calls onAddTask (lifting state up to useTasks)
 // and then clears itself.
-const TaskInput: React.FC<TaskInputProps> = ({ onAddTask }) => {
+const TaskInput: React.FC = () => {
   const [value, setValue] = useState<string>("");
+  const { addTask } = useTaskContext();
 
   const handleAdd = () => {
     if (!value.trim()) return; // don't submit empty strings
-    onAddTask(value);
-    setValue("");              // reset field after submission
+    addTask(value);
+    setValue(""); // reset field after submission
   };
 
   // Pressing Enter should also submit
