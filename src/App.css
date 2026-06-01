@@ -1,7 +1,4 @@
 /* ============================================================
-   App.css — STRUCTURAL ONLY
-   These are skeleton/layout styles based on the wireframe.
-   You will replace / extend these with your own design system.
    
    Philosophy: every class here answers "WHERE does this go?"
    not "HOW does this look?" — that's your job next.
@@ -35,6 +32,10 @@ body {
   flex-direction: column;
   gap: 1rem;
   padding: 2rem;
+}
+
+.timer-panel.expanded {
+  flex: 1;
 }
 
 /* ── Right panel: 30% (defined in Sidebar.tsx's .sidebar) ─── */
@@ -226,7 +227,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0.75rem;
-  background: #e8e8e8;
+  background: #a07c7c;
   border-radius: 4px;
   font-size: 0.9rem;
 }

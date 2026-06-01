@@ -6,7 +6,7 @@ interface TimerControlsProps {
   onStart: () => void;
   onPause: () => void;
   onReset: () => void;
-  // onSettings and onExpand are placeholders — wired to no-ops for now.
+  // onSettings and onExpand are placeholders.
   onSettings: () => void;
   onExpand: () => void;
 }
@@ -43,7 +43,7 @@ const TimerControls: React.FC<TimerControlsProps> = ({
           title="Reset timer"
           aria-label="Reset timer"
         >
-          &lt;
+          🔁
         </button>
 
         <button
@@ -53,7 +53,7 @@ const TimerControls: React.FC<TimerControlsProps> = ({
           title="Settings"
           aria-label="Settings"
         >
-          +
+          ⚙️
         </button>
 
         <button
@@ -63,7 +63,7 @@ const TimerControls: React.FC<TimerControlsProps> = ({
           title="Expand"
           aria-label="Expand"
         >
-          /
+          💢
         </button>
       </div>
     </div>

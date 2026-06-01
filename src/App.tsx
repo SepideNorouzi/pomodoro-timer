@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ModeSelector from "./components/TimerPanel/ModeSelector";
 import TimerDisplay from "./components/TimerPanel/TimerDisplay";
 import TimerControls from "./components/TimerPanel/TimerControls";
@@ -7,6 +7,7 @@ import TaskInput from "./components/TaskInput/TaskInput";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { useTimer } from "./hooks/UseTimer";
 import { useTasks } from "./hooks/UseTasks";
+import SettingsModal from "./components/Setting/SettingsModal";
 import "./App.css";
 
 //   timer panel  → flex: 0 0 70%  (fixed 70%)
@@ -14,20 +15,25 @@ import "./App.css";
 const App: React.FC = () => {
   const timer = useTimer();
   const taskManager = useTasks();
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Placeholder handlers for settings and expand (later)
   const handleSettings = () => {
-    console.log("Settings clicked — implement modal");
+    setIsSettingsOpen(true);
+  };
+  const closeSettings = () => {
+    setIsSettingsOpen(false);
   };
 
   const handleExpand = () => {
-    console.log("Expand clicked — implement fullscreen");
+    setIsExpanded((prev) => !prev);
   };
 
   return (
     <div className="app">
       {/*Timer Panel (70%) */}
-      <main className="timer-panel">
+      <main className={`timer-panel ${isExpanded ? "expanded" : ""}`}>
         {/* Timer container */}
         <section className="timer-container">
           <ModeSelector activeMode={timer.mode} onModeChange={timer.setMode} />
@@ -48,11 +54,13 @@ const App: React.FC = () => {
         <ProgressBar progress={timer.progress} />
 
         {/* Task input*/}
-        <TaskInput onAddTask={taskManager.addTask} />
+        {!isExpanded && <TaskInput onAddTask={taskManager.addTask} />}
       </main>
 
       {/* Sidebar (30%)*/}
-      <Sidebar tasks={taskManager.tasks} />
+      {!isExpanded && <Sidebar tasks={taskManager.tasks} />}
+
+      <SettingsModal isOpen={isSettingsOpen} onClose={closeSettings} />
     </div>
   );
 };
