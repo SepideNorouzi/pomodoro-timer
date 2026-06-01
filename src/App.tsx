@@ -5,9 +5,7 @@ import TimerControls from "./components/TimerPanel/TimerControls";
 import ProgressBar from "./components/TimerPanel/ProgressBar";
 import TaskInput from "./components/TaskInput/TaskInput";
 import Sidebar from "./components/Sidebar/Sidebar";
-
 import SettingsModal from "./components/Setting/SettingsModal";
-import "./App.css";
 import { useTaskContext } from "./context/TaskContext";
 import { useTimerContext } from "./context/TimerContext";
 

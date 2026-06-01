@@ -1,10 +1,44 @@
-/* ============================================================
-   
-   Philosophy: every class here answers "WHERE does this go?"
-   not "HOW does this look?" — that's your job next.
-   ============================================================ */
+@import "tailwindcss";
 
-/* ── Reset basics ─────────────────────────────────────────── */
+body {
+  font-family: "Press Start 2P", cursive;
+  background: #f7c8c8;
+  min-height: 100vh;
+  color: #111;
+  image-rendering: pixelated;
+}
+
+:root {
+  --pink: #ff6368;
+  --pink-dark: #ff4b57;
+  --panel: #efefef;
+  --black: #111;
+}
+
+.pixel-shadow {
+  box-shadow: 8px 8px 0 #000;
+}
+
+.pixel-border {
+  border: 4px solid #000;
+}
+
+.pixel-button {
+  border: 4px solid #000;
+  background: var(--panel);
+  box-shadow: 4px 4px 0 #000;
+  transition: transform 0.1s;
+}
+
+.pixel-button:hover {
+  transform: translate(-2px, -2px);
+}
+
+.pixel-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
 *,
 *::before,
 *::after {
@@ -13,19 +47,11 @@
   padding: 0;
 }
 
-body {
-  font-family: sans-serif; /* placeholder — you'll swap this */
-  background: #f5f5f5; /* matches your wireframe bg color */
-  min-height: 100vh;
-}
-
-/* ── Root layout: two columns ─────────────────────────────── */
 .app {
   display: flex;
   min-height: 100vh;
 }
 
-/* ── Left panel: 70% ──────────────────────────────────────── */
 .timer-panel {
   flex: 0 0 70%;
   display: flex;
@@ -38,64 +64,76 @@ body {
   flex: 1;
 }
 
-/* ── Right panel: 30% (defined in Sidebar.tsx's .sidebar) ─── */
 .sidebar {
-  flex: 1; /* fills the remaining 30% */
-  border-left: 1px solid #ccc;
+  background: #f0b9b9;
+
+  border-left: 5px solid #000;
+
   padding: 2rem;
-  overflow-y: auto;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   TIMER CONTAINER
-   The big box: mode tabs + clock + buttons
-   ───────────────────────────────────────────────────────────── */
 .timer-container {
+  max-width: 750px;
+  margin: 0 auto;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  padding: 2rem;
-  background: #e0e0e0; /* wireframe gray placeholder */
-  border-radius: 4px;
+
+  gap: 2rem;
+
+  padding: 3rem;
+
+  background: var(--panel);
+
+  border: 5px solid #000;
+
+  box-shadow: 10px 10px 0 #000;
 }
 
-/* ── Mode selector: 3 tabs in a row ──────────────────────── */
 .mode-selector {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .mode-btn {
-  padding: 0.5rem 1.25rem;
-  background: #ccc;
-  border: none;
-  border-radius: 4px;
+  font-family: inherit;
+
+  padding: 1rem 1.2rem;
+
+  border: 4px solid #000;
+
+  background: white;
+
+  box-shadow: 4px 4px 0 #000;
+
   cursor: pointer;
-  font-size: 0.9rem;
+
+  font-size: 0.55rem;
 }
 
 .mode-btn--active {
-  background: #555;
-  color: #fff;
+  background: var(--pink);
+  color: white;
 }
 
-/* ── Big clock display ────────────────────────────────────── */
 .timer-display {
-  width: 100%;
-  background: #d5d5d5;
-  border-radius: 4px;
-  padding: 2rem;
-  text-align: center;
+  background: transparent;
+  padding: 0;
 }
 
 .timer-display__time {
-  font-size: 5rem;
-  font-weight: 300;
-  letter-spacing: 0.05em;
+  font-size: 6rem;
+  line-height: 1;
+  font-weight: normal;
 }
 
-/* ── Controls: start/pause + icon row ────────────────────── */
+@media (max-width: 768px) {
+  .timer-display__time {
+    font-size: 3.5rem;
+  }
+}
+
 .timer-controls {
   display: flex;
   flex-direction: column;
@@ -105,14 +143,19 @@ body {
 }
 
 .timer-controls__primary {
-  padding: 0.6rem 3rem;
-  background: #888;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
+  font-family: inherit;
+  background: var(--pink);
+  color: white;
+  border: 4px solid #000;
+  padding: 1.5rem 4rem;
   font-size: 1rem;
+  box-shadow: 6px 6px 0 #000;
   cursor: pointer;
-  letter-spacing: 0.08em;
+}
+
+.timer-controls__primary:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
 }
 
 .timer-controls__secondary {
@@ -121,64 +164,43 @@ body {
 }
 
 .timer-controls__icon-btn {
-  width: 2.5rem;
-  height: 2.5rem;
-  background: #aaa;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border: 4px solid #000;
+  background: white;
+  box-shadow: 4px 4px 0 #000;
+  font-size: 1.1rem;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   PROGRESS BAR
-   ───────────────────────────────────────────────────────────── */
 .progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #d0d0d0;
-  border-radius: 99px;
+  height: 20px;
+  border: 4px solid #000;
+  background: white;
   overflow: hidden;
 }
 
 .progress-bar__fill {
-  height: 100%;
-  background: #555;
-  border-radius: 99px;
-  transition: width 1s linear; /* smooth 1-second step, synced to the timer tick */
+  background: var(--pink);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   TASK INPUT
-   ───────────────────────────────────────────────────────────── */
 .task-input {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1.25rem;
-  background: #e0e0e0;
-  border-radius: 4px;
+  background: var(--panel);
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0 #000;
+  font-family: system-ui, sans-serif;
 }
 
 .task-input__field {
-  width: 100%;
-  padding: 0.7rem 1rem;
-  border: 1px solid #bbb;
-  border-radius: 4px;
-  font-size: 0.95rem;
-  background: #f0f0f0;
+  border: 3px solid #000;
+  font-family: inherit;
+  background: white;
 }
 
 .task-input__btn {
-  padding: 0.6rem;
-  background: #aaa;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
+  background: var(--pink);
+  color: white;
+  border: 3px solid #000;
+  font-family: "Press Start 2P", cursive;
 }
 
 .task-input__btn:disabled {
@@ -186,9 +208,6 @@ body {
   cursor: not-allowed;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   TASK LIST (in sidebar)
-   ───────────────────────────────────────────────────────────── */
 .task-list {
   display: flex;
   flex-direction: column;
@@ -207,7 +226,6 @@ body {
   font-size: 0.9rem;
 }
 
-/* ── Header row: "task | duration" ───────────────────────── */
 .task-list__header {
   display: flex;
   justify-content: space-between;
@@ -221,15 +239,25 @@ body {
   margin-bottom: 0.25rem;
 }
 
-/* ── Individual task row ──────────────────────────────────── */
 .task-item {
+  background: #efefef;
+  border: 4px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  padding: 1rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0.75rem;
-  background: #a07c7c;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.task-item:hover {
+  transform: translate(-2px, -2px);
+}
+
+.task-item.active {
+  background: var(--pink);
+  color: white;
 }
 
 .task-item__name {
@@ -241,8 +269,9 @@ body {
 }
 
 .task-item__duration {
-  font-variant-numeric: tabular-nums; /* digits stay same width → no layout jump */
+  font-variant-numeric: tabular-nums;
   color: #555;
   font-size: 0.85rem;
   white-space: nowrap;
 }
+
