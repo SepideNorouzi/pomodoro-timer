@@ -4,6 +4,7 @@ import TaskItem from "./TaskItem";
 
 interface TaskListProps {
   tasks: Task[];
+  onDeleteTask: (id: string) => void;
 }
 
 // Two states:
@@ -11,7 +12,7 @@ interface TaskListProps {
 //   2. Has tasks → show the column headers + a TaskItem for each task
 
 // The header row ("task | duration") only appears once the list is non-empty,
-const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
+const TaskList: React.FC<TaskListProps> = ({ tasks, onDeleteTask }) => {
   if (tasks.length === 0) {
     return (
       <div className="task-list task-list--empty">
@@ -30,7 +31,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
 
       {/* Task rows */}
       {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} />
+        <TaskItem key={task.id} task={task} onDeleteTask={onDeleteTask} />
       ))}
     </div>
   );

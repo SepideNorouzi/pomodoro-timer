@@ -1,14 +1,21 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { type Task } from "../types";
 
 export interface UseTasksReturn {
   tasks: Task[];
   addTask: (name: string) => void;
   logTime: (id: string, seconds: number) => void; // called by timer each tick
+  deleteTask: (id: string) => void;
 }
 
 export function useTasks(): UseTasksReturn {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    if (!savedTasks) {
+      return [];
+    }
+    return JSON.parse(savedTasks);
+  });
 
   // Add a new task
   // crypto.randomUUID() for IDs — it's built into every modern browser,
@@ -40,5 +47,13 @@ export function useTasks(): UseTasksReturn {
     );
   }, []);
 
-  return { tasks, addTask, logTime };
+  const deleteTask = (id: string) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  };
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  return { tasks, addTask, logTime, deleteTask };
 }

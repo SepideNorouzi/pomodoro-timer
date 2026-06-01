@@ -58,7 +58,12 @@ const App: React.FC = () => {
       </main>
 
       {/* Sidebar (30%)*/}
-      {!isExpanded && <Sidebar tasks={taskManager.tasks} />}
+      {!isExpanded && (
+        <Sidebar
+          tasks={taskManager.tasks}
+          onDeleteTask={taskManager.deleteTask}
+        />
+      )}
 
       <SettingsModal isOpen={isSettingsOpen} onClose={closeSettings} />
     </div>
