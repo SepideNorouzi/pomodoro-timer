@@ -84,6 +84,15 @@ body {
   padding: 1.5rem;
 }
 
+@media (min-width: 1024px) {
+  .timer-panel {
+    /* FIX: Creates an exclusive 5rem safety clearance zone at the top ceiling. */
+    /* This gracefully pushes the timer container down so it NEVER collides with the hearts. */
+    padding-top: 5rem; 
+    justify-content: flex-start; /* Aligns content cleanly below the header zone */
+  }
+}
+
 .timer-panel.expanded {
   flex: 1;
 }
@@ -483,24 +492,21 @@ body {
 .life-counter {
   display: flex;
   flex-direction: row;
-  gap: 0.4rem;
-  justify-content: center; /* Centers perfectly on mobile screens */
+  gap: 0.35rem;
+  justify-content: center; /* Centers perfectly above the layout stack on mobile screen sizes */
   width: 100%;
-  margin-top: 1rem;       /* Keeps hearts from hitting the top edge of the screen */
-  margin-bottom: 1.75rem; /* FIX: Pushes the timer container down with comfortable breathing room */
+  padding-top: 1.25rem;    /* Generous breathing room from mobile viewport edge */
   user-select: none;
   pointer-events: none;
-  z-index: 40;
 }
 
 /* Desktop absolute realignment */
 @media (min-width: 1024px) {
   .life-counter {
-    position: absolute;    /* Lifts out of the stack to anchor to the canvas */
-    top: 2.5rem;          /* Crisp, consistent padding from the top corner */
-    left: 2.5rem;         /* Crisp, consistent padding from the left corner */
-    width: auto;           /* Collapses the full-width mobile row wrapper */
-    margin-top: 0;        /* Clears out the mobile margins completely */
-    margin-bottom: 0;     /* Clears out the mobile margins completely */
+    position: absolute;    /* Lifts out of the flex row completely to save your 70%/30% layout */
+    top: 2rem;             /* Fixed clean placement from top corner page canvas */
+    left: 2rem;            /* Fixed clean placement from left corner page canvas */
+    width: auto;           /* Drops full-width row block */
+    padding-top: 0;        /* Wipes out mobile spacing padding variables */
   }
 }

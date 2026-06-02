@@ -43,9 +43,8 @@ const App: React.FC = () => {
 
   return (
     <>
-      {/* This floats independently over the entire application window */}
-      <LifeCounter />
       <div className="app">
+        <LifeCounter />
         {/*Timer Panel (70%) */}
         <main className={`timer-panel ${isExpanded ? "expanded" : ""}`}>
           {/* Timer container */}
