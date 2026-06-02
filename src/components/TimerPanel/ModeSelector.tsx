@@ -10,12 +10,12 @@ const MODES: { value: TimerMode; label: string }[] = [
 
 const ModeSelector: React.FC = () => {
   const { mode, setMode } = useTimerContext();
-  
+
   return (
     <div className="flex flex-row flex-nowrap w-full justify-between gap-2 md:gap-4">
       {MODES.map(({ value, label }) => {
         const isActive = mode === value;
-        
+
         return (
           <button
             key={value}
@@ -27,10 +27,12 @@ const ModeSelector: React.FC = () => {
               border-4 border-black 
               transition-all duration-75 ease-in-out
               cursor-pointer select-none
-              ${isActive 
-                ? "bg-[#ff6368] text-white translate-x-[4px] translate-y-[4px] shadow-none" 
-                : "bg-white text-black shadow-[4px_4px_0px_#000] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none"
+              ${
+                isActive
+                  ? "bg-[#ff7ba4] text-white translate-x-[4px] translate-y-[4px] shadow-none"
+                  : "bg-white text-[#1c2259] shadow-[4px_4px_0px_#1c2259] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none"
               }
+                border-4 border-[#1c2259]
             `}
             onClick={() => setMode(value)}
             type="button"

@@ -36,7 +36,7 @@ const TaskInput: React.FC = () => {
         type="button"
         disabled={!value.trim()}
       >
-        add task
+        Add task
       </button>
     </div>
   );

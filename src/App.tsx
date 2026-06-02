@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import SettingsModal from "./components/Setting/SettingsModal";
 import { useTaskContext } from "./context/TaskContext";
 import { useTimerContext } from "./context/TimerContext";
+import LifeCounter from "./components/ui/LifeCounter";
 
 //   timer panel  → flex: 0 0 70%  (fixed 70%)
 //   sidebar      → flex: 1        (takes the remaining 30%)
@@ -41,30 +42,37 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="app">
-      {/*Timer Panel (70%) */}
-      <main className={`timer-panel ${isExpanded ? "expanded" : ""}`}>
-        {/* Timer container */}
-        <section className="timer-container">
-          <ModeSelector />
+    <>
+      {/* This floats independently over the entire application window */}
+      <LifeCounter />
+      <div className="app">
+        {/*Timer Panel (70%) */}
+        <main className={`timer-panel ${isExpanded ? "expanded" : ""}`}>
+          {/* Timer container */}
+          <section className="timer-container">
+            <ModeSelector />
 
-          <TimerDisplay />
+            <TimerDisplay />
 
-          <TimerControls onSettings={handleSettings} onExpand={handleExpand} />
-        </section>
+            <TimerControls
+              onSettings={handleSettings}
+              onExpand={handleExpand}
+            />
+          </section>
 
-        {/* fills as the session elapses */}
-        <ProgressBar />
+          {/* fills as the session elapses */}
+          <ProgressBar />
 
-        {/* Task input*/}
-        {!isExpanded && <TaskInput />}
-      </main>
+          {/* Task input*/}
+          {!isExpanded && <TaskInput />}
+        </main>
 
-      {/* Sidebar (30%)*/}
-      {!isExpanded && <Sidebar />}
+        {/* Sidebar (30%)*/}
+        {!isExpanded && <Sidebar />}
 
-      <SettingsModal isOpen={isSettingsOpen} onClose={closeSettings} />
-    </div>
+        <SettingsModal isOpen={isSettingsOpen} onClose={closeSettings} />
+      </div>
+    </>
   );
 };
 

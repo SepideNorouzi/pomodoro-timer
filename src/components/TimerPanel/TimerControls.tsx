@@ -25,10 +25,11 @@ const TimerControls: React.FC<TimerControlsProps> = ({
         className="
           w-full max-w-[300px]
           font-inherit text-white text-base md:text-lg uppercase tracking-wider
-          bg-[#ff6368] 
-          border-4 border-black 
+bg-[#ff7ba4] 
+border-4 border-[#1c2259] 
+shadow-[6px_6px_0px_#1c2259] 
           py-4 px-10 
-          shadow-[6px_6px_0px_#000] 
+          shadow-[6px_6px_0px_#1c2259] 
           transition-all duration-75 ease-in-out
           cursor-pointer select-none
           active:translate-x-[6px] active:translate-y-[6px] active:shadow-none
@@ -47,8 +48,8 @@ const TimerControls: React.FC<TimerControlsProps> = ({
             w-14 h-14 md:w-16 md:h-16 
             flex items-center justify-center 
             bg-white text-black
-            border-4 border-black 
-            shadow-[4px_4px_0px_#000] 
+            border-4 border-[#1c2259] 
+            shadow-[4px_4px_0px_#1c2259] 
             transition-all duration-75 ease-in-out
             cursor-pointer
             active:translate-x-[4px] active:translate-y-[4px] active:shadow-none
@@ -68,8 +69,8 @@ const TimerControls: React.FC<TimerControlsProps> = ({
             w-14 h-14 md:w-16 md:h-16 
             flex items-center justify-center 
             bg-white text-black
-            border-4 border-black 
-            shadow-[4px_4px_0px_#000] 
+            border-4 border-[#1c2259] 
+            shadow-[4px_4px_0px_#1c2259] 
             transition-all duration-75 ease-in-out
             cursor-pointer
             active:translate-x-[4px] active:translate-y-[4px] active:shadow-none
@@ -88,8 +89,8 @@ const TimerControls: React.FC<TimerControlsProps> = ({
             w-14 h-14 md:w-16 md:h-16 
             flex items-center justify-center 
             bg-white text-black
-            border-4 border-black 
-            shadow-[4px_4px_0px_#000] 
+            border-4 border-[#1c2259] 
+            shadow-[4px_4px_0px_#1c2259] 
             transition-all duration-75 ease-in-out
             cursor-pointer
             active:translate-x-[4px] active:translate-y-[4px] active:shadow-none

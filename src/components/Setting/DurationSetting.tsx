@@ -19,7 +19,7 @@ const DurationSetting = ({
         bg-[#5d7380]
         border-[4px]
         border-black
-        shadow-[4px_4px_0px_#000]
+        shadow-[4px_4px_0px_#1c2259]
         p-3
         flex
         flex-col
@@ -47,7 +47,7 @@ const DurationSetting = ({
             border-[3px]
             border-black
             bg-[#8db9c7]
-            shadow-[2px_2px_0px_#000]
+            shadow-[4px_4px_0px_#1c2259]
             flex
             items-center
             justify-center
@@ -79,7 +79,7 @@ const DurationSetting = ({
             border-[3px]
             border-black
             bg-[#8db9c7]
-            shadow-[2px_2px_0px_#000]
+            shadow-[4px_4px_0px_#1c2259]
             flex
             items-center
             justify-center

@@ -8,11 +8,7 @@ interface TaskItemProps {
   task: Task;
 }
 
-// Renders one task row: task name on the left, total time logged on the right.
-// It reuses the `formatTime` utility from TimerDisplay so MM:SS formatting
-// is consistent across the whole app
 const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
-  // Only the actual task object remains a prop, because TaskItem is rendering one specific task
   const { deleteTask, activeTaskId, setActiveTaskId } = useTaskContext();
   const isActive = activeTaskId === task.id;
 
@@ -20,19 +16,18 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
     <div
       className={`
         grid grid-cols-3 items-center 
-        min-h-[72px] px-8 py-3 mb-3 w-full
-        border-4 border-black 
-        shadow-[4px_4px_0px_#000] 
+        min-h-[72px] px-6 py-3 mb-3 w-full
+        border-4 border-[#1c2259] 
         cursor-pointer select-none
         transition-all duration-75 ease-in-out
-        hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[6px_6px_0px_#000]
+        hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[6px_6px_0px_#1c2259]
         active:translate-x-[4px] active:translate-y-[4px] active:shadow-none
-        ${isActive ? "bg-[#ff6368] text-white" : "bg-white text-[#111]"}
+        ${isActive ? "bg-[#ff7ba4] text-white shadow-none" : "bg-white text-[#1c2259] shadow-[4px_4px_0px_#1c2259]"}
       `}
       onClick={() => setActiveTaskId(task.id)}
     >
-      {/* Col 1: Left-aligned Name (with pl-2 for inner edge gap) */}
-      <span className="text-left font-sans font-bold text-base truncate pl-2">
+      {/* Col 1: Left-aligned Name (with exact 5px margin from the left boundary) */}
+      <span className="text-left font-sans font-bold text-base truncate ml-[5px]">
         {task.name}
       </span>
 
@@ -45,7 +40,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
           }}
           className={`
             p-2 transition-colors duration-100 ease-in-out
-            ${isActive ? "text-white/80 hover:text-white" : "text-[#ff6368] hover:text-[#ff3339]"}
+            ${isActive ? "text-white/80 hover:text-white" : "text-[#ff7ba4] hover:text-[#e65c87]"}
           `}
           title="Delete task"
           aria-label="Delete task"
@@ -54,8 +49,8 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
         </button>
       </div>
 
-      {/* Col 3: Right-aligned Duration (font-inherit brings in the retro game font) */}
-      <span className="text-right font-inherit text-[11px] font-bold tracking-wider m-10 tabular-nums">
+      {/* Col 3: Right-aligned Duration (with exact 5px margin from the right boundary) */}
+      <span className="text-right font-inherit text-[11px] font-bold tracking-wider mr-[5px] tabular-nums">
         {formatTime(task.totalSeconds)}
       </span>
     </div>
