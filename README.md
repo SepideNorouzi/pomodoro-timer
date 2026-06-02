@@ -1,73 +1,106 @@
-# React + TypeScript + Vite
+# Pomodoro Timer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This is a personal Pomodoro timer app built to support deep study sessions. The interface was partially designed in **Figma** before code was written.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- **Multiple timer modes** — Focus, Short Break, and Long Break
+- **Countdown display** — Clear, readable timer with start/pause control
+- **Task input & sidebar** — Add and track tasks alongside your timer
+- **Progress bar** — Visual feedback for the current session
+- **Action buttons** — Reset, skip, and manage your session flow
+- **Clean, modular architecture** — Components are small and focused
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Technology      | Role                            |
+| --------------- | ------------------------------- |
+| **React**       | UI component library            |
+| **TypeScript**  | Type safety across the codebase |
+| **TailwindCSS** | Utility-first styling           |
+| **Vite**        | Fast dev server & bundler       |
+| **Figma**       | wireframing                     |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## Project Structure
+
+```
+pomodoro-timer/
+├── src/
+│   ├── components/        # Reusable UI components
+│   ├── hooks/             # Custom React hooks (timer logic, etc.)
+│   ├── types/             # TypeScript type definitions
+│   └── App.tsx            # Root component
+├── global.css             # Global styles
+├── index.html             # HTML entry point
+├── vite.config.ts         # Vite configuration
+├── tsconfig.json          # TypeScript config
+└── package.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Getting Started
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
+
+Make sure you have **Node.js** (v18+) and **npm** installed.
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/SepideNorouzi/pomodoro-timer.git
+
+# Navigate into the project
+cd pomodoro-timer
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
 ```
+
+The app will be available at `http://localhost:5173` by default.
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+---
+
+## Design Process
+
+- Layout wireframes in figma (two-column structure)
+- Component hierarchy planning
+- Color palette and typography decisions
+- Interactive states (hover, active, disabled)
+
+---
+
+## What I Learned
+
+- Translating a Figma wireframe into production React components
+- Managing timer state with `useEffect` and `useRef`
+- Structuring a TypeScript + React project with clean component boundaries
+- Using TailwindCSS for responsive, utility-driven styling
+
+---
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
