@@ -477,16 +477,17 @@ body {
 }
 
 /* =========================================
-   LIFE COUNTER (Dynamic Context Positioning)
+   LIFE COUNTER (Fixed Responsive Layout)
    ========================================= */
 
 .life-counter {
   display: flex;
   flex-direction: row;
-  gap: 0.35rem;
-  justify-content: center; /* Centers the hearts perfectly on mobile */
+  gap: 0.4rem;
+  justify-content: center; /* Centers perfectly on mobile screens */
   width: 100%;
-  margin-bottom: 0.5rem;    /* Sets a clean gap directly above the timer container */
+  margin-top: 1rem;       /* Keeps hearts from hitting the top edge of the screen */
+  margin-bottom: 1.75rem; /* FIX: Pushes the timer container down with comfortable breathing room */
   user-select: none;
   pointer-events: none;
   z-index: 40;
@@ -495,10 +496,11 @@ body {
 /* Desktop absolute realignment */
 @media (min-width: 1024px) {
   .life-counter {
-    position: absolute;    /* Pulls it out of flow to stick it to the page coordinate */
-    top: 2rem;
-    left: 2rem;
-    width: auto;           /* Removes full width row scaling */
-    margin-bottom: 0;      /* Clears out mobile spacer spacing */
+    position: absolute;    /* Lifts out of the stack to anchor to the canvas */
+    top: 2.5rem;          /* Crisp, consistent padding from the top corner */
+    left: 2.5rem;         /* Crisp, consistent padding from the left corner */
+    width: auto;           /* Collapses the full-width mobile row wrapper */
+    margin-top: 0;        /* Clears out the mobile margins completely */
+    margin-bottom: 0;     /* Clears out the mobile margins completely */
   }
 }
