@@ -262,10 +262,10 @@ body {
   align-items: center;
   justify-content: center;
   font-family: inherit;
-  font-size: 0.25rem; /* Crisp, tiny micro arcade text font size */
+  font-size: clamp(0.45rem, 2vw, 0.7rem);
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  padding:  20px; 
+  padding: 0.75rem 0.35rem; 
   border: 4px solid var(--black);
   background: white;
   color: var(--black);
@@ -273,18 +273,14 @@ body {
   cursor: pointer;
   transition: all 0.075s ease-in-out;
   user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-@media (min-width: 360px) {
-  .mode-selector__btn {
-    font-size: 0.6rem;
-  }
-}
 
 @media (min-width: 768px) {
   .mode-selector__btn {
     font-size: 0.7rem;
-    padding: 0.85rem 0.5rem;
   }
 }
 
