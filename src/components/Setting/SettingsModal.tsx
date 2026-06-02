@@ -1,6 +1,5 @@
 import DurationSetting from "./DurationSetting";
 import { useTimerContext } from "../../context/TimerContext";
-import "./SettingsModal.css";
 
 interface SettingsModalProps {
   isOpen: boolean;
