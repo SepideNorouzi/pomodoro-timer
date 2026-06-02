@@ -8,7 +8,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import SettingsModal from "./components/Setting/SettingsModal";
 import { useTaskContext } from "./context/TaskContext";
 import { useTimerContext } from "./context/TimerContext";
-import LifeCounter from "./components/UI/LifeCounter";
+import LifeCounter from "./components/Design/LifeCounter";
 
 //   timer panel  → flex: 0 0 70%  (fixed 70%)
 //   sidebar      → flex: 1        (takes the remaining 30%)
