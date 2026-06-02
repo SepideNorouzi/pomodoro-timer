@@ -13,8 +13,21 @@ const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-      <div className="relative bg-[#efefef] border-[5px] border-black shadow-[4px_4px_0px_#1c2259] p-8 w-[800px] h-[400px]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+      <div
+        className="
+    relative
+    bg-[#efefef]
+    border-[5px]
+    border-black
+    shadow-[4px_4px_0px_#1c2259]
+    p-8
+    w-[800px]
+    h-[400px]
+    max-md:w-[95vw]
+    max-md:h-auto
+  "
+      >
         <button
           className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center border-[3px] border-black bg-[#ff7ba4] shadow-[4px_4px_0px_#1c2259] text-xs hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all"
           onClick={onClose}
@@ -22,7 +35,17 @@ const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
           <X />
         </button>
 
-        <div className="flex h-full items-center justify-center gap-8">
+        <div
+          className="
+    flex
+    flex-row
+    max-md:flex-col
+    h-full
+    items-center
+    justify-center
+    gap-8
+    max-md:gap-4
+  ">
           <DurationSetting
             title="Pomodoro"
             value={durations.pomodoro / 60}

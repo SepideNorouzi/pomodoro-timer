@@ -14,18 +14,20 @@ const DurationSetting = ({
   return (
     <div
       className="
-        w-50
-        h-50
-        bg-[#5d7380]
-        border-[4px]
-        border-black
-        shadow-[4px_4px_0px_#1c2259]
-        p-3
-        flex
-        flex-col
-        justify-center
-        items-center
-      "
+    w-full
+    max-w-[220px]
+    h-[180px]
+    md:h-[200px]
+    bg-[#5d7380]
+    border-[4px]
+    border-black
+    shadow-[4px_4px_0px_#1c2259]
+    p-3
+    flex
+    flex-col
+    justify-center
+    items-center
+  "
     >
       <h2
         className="
