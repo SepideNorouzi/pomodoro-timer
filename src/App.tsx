@@ -27,9 +27,7 @@ const App: React.FC = () => {
     });
   }, [setOnTick, logTime]);
 
-  // Whenever the active task changes, we want to update the timer's onTick callback
-
-  // Placeholder handlers for settings and expand (later)
+  // Whenever the active task changes,update the timer's onTick callback
   const handleSettings = () => {
     setIsSettingsOpen(true);
   };

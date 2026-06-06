@@ -11,6 +11,7 @@ export interface UseTimerReturn {
   updateDuration: (mode: TimerMode, minutes: number) => void;
   setMode: (m: TimerMode) => void;
   setOnTick: (fn: () => void) => void;
+  setOnComplete: (fn: () => void) => void;
   start: () => void;
   pause: () => void;
   reset: () => void;
@@ -60,9 +61,10 @@ export function useTimer(): UseTimerReturn {
         if (prev <= 1) {
           clearTimer();
           setStatus("idle");
-          return 0;
+          onCompleteRef.current?.(); //  NEW: fire the completion callback
+          return durations[currentMode]; // resets to full duration immediately
         }
-        onTickRef.current?.(); // this is the bridge
+        onTickRef.current?.();
         return prev - 1;
       });
     }, 1000);
@@ -117,6 +119,12 @@ export function useTimer(): UseTimerReturn {
     onTickRef.current = fn;
   };
 
+  const onCompleteRef = useRef<(() => void) | null>(null);
+
+  const setOnComplete = (fn: () => void) => {
+    onCompleteRef.current = fn;
+  };
+
   return {
     mode: currentMode,
     status,
@@ -129,5 +137,6 @@ export function useTimer(): UseTimerReturn {
     pause,
     reset,
     setOnTick,
+    setOnComplete,
   };
 }
